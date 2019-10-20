@@ -1,4 +1,4 @@
-defmodule Codewars.User do
+defmodule Codewars.Users do
   import Codewars
   alias Codewars.Client
 

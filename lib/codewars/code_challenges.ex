@@ -7,9 +7,9 @@ defmodule Codewars.CodeChallenges do
     get("/users/" <> username <> "/code-challenges/completed", client, [{:page, page}])
   end
 
-  @spec authored(Client.t, String.t, integer) :: Codewars.response
-  def authored(client, username, page \\ 0) do
-    get("/users/" <> username <> "/code-challenges/authored", client, [{:page, page}])
+  @spec authored(Client.t, String.t) :: Codewars.response
+  def authored(client, username) do
+    get("/users/" <> username <> "/code-challenges/authored", client)
   end
 
   @spec find(Client.t, String.t) :: Codewars.response
