@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :codewars_client, key: :value
+#     config :codewars, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:codewars_client, :key)
+#     Application.get_env(:codewars, :key)
 #
 # You can also configure a third-party app:
 #
