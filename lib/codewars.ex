@@ -6,29 +6,10 @@ defmodule Codewars do
     {:ok, any, HTTPoison.Response.t()}
     | {:error, any, HTTPoison.Response.t()}
 
-  @spec delete(binary, Client.t(), any) :: response
-  def delete(path, client, params \\ []) do
-    _request(:delete, path, client, params)
-  end
-
-  @spec post(binary, Client.t(), any) :: response
-  def post(path, client, params \\ []) do
-    _request(:post, path, client, params)
-  end
-
-  @spec patch(binary, Client.t(), any) :: response
-  def patch(path, client, params \\ []) do
-    _request(:patch, path, client, params)
-  end
-
-  @spec put(binary, Client.t(), any) :: response
-  def put(path, client, params \\ []) do
-    _request(:put, path, client, params)
-  end
-
   @spec get(binary, Client.t(), any) :: response
   def get(path, client, params \\ []) do
-    _request(:get, path, client, params)
+    uri = client |> url(path) |> add_params(params)
+    request!(:get, uri, "", client |> headers) |> process_response
   end
 
   def process_response_body(body) do
@@ -39,12 +20,6 @@ defmodule Codewars do
   @spec process_response(HTTPoison.Response.t() | {integer, any, HTTPoison.Response.t()}) :: response
   def process_response(%HTTPoison.Response{status_code: status_code, body: body} = resp), do: {status_code, body, resp}
   def process_response({_status_code, _, %HTTPoison.Response{} = resp}), do: process_response(resp)
-
-  @spec _request(:delete | :get | :patch | :post | :put, binary, Client.t, list) :: response
-  defp _request(method, path, client, params) do
-    uri = client |> url(path) |> add_params(params)
-   request!(method, uri, "", client |> headers) |> process_response
-  end
 
   @spec url(Client.t, binary) :: binary
   defp url(_client = %Client{endpoint: endpoint}, path) do
