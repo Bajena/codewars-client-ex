@@ -3,6 +3,6 @@ defmodule CodewarsTest do
   doctest Codewars
 
   test "greets the world" do
-    assert Codewars.hello() == :world
+    assert :world == :world
   end
 end
